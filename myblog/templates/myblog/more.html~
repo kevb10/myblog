@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+
+<body>
+<h1>Kevin Manase</h1>
+<h3>{{ post.title }}</h3>
+<ul>
+{% for body in post.body %}
+    <p>{{ post.body }}</p>
+{% endfor %}
+</ul>
+</body>
+
+</html>

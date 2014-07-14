@@ -1,0 +1,59 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Kevin Manase's Blog</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+     {% load staticfiles %}
+    <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        <h3 class="text-muted">Kevin Manase's Blog</h3>
+    </div>
+
+{% if user.is_authenticated %}
+<p>You are already logged in. Click here to <a href="{% url 'auth_logout' %}">Logout</a></p>
+{% else %}
+
+{% load url from future %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" role="form" action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+<div class="form-group">
+    <label>{{ form.username.label_tag }}</label>
+    {{ form.username }}
+</div>
+<div class="form-group">
+    <label>{{ form.password.label_tag }}</label>
+    {{ form.password }}
+</div>
+
+<button class="btn btn-default" type="submit">Submit</button>
+<input type="hidden" name="next" value="{% url 'index' %}" />
+</form>
+
+{% endblock %}
+{% endif %}
+    </div>
+</body>
+</html>

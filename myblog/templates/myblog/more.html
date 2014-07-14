@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% load staticfiles %}
+    <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    <style>
+    #id_honeypot {
+    display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'new' %}">New Post</a></li>
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        <h3 class="text-muted">Kevin Manase's Blog</h3>
+    </div>
+    <h2 style="text-align:left;float:left"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;{{ post.title }}</h2>
+    <h5 style="text-align:right;float:right;margin-top:30px">{{ post.pub_date }}</h5>
+    <hr style="clear:both"/>
+    <p>{{ post.body }}</p>
+    <div>
+        <br>
+        <p style="text-align:left;float:left"><a role="button" class="btn btn-success" href="{% url 'index' %}"><< Go back</a></p>
+        {% if user.is_authenticated %}
+        <p style="text-align:right;float:right;"><a role="button" class="btn btn-danger" href="{% url 'delete' post.id %}"><strong>x</strong> Delete</a></p>
+        {% endif %}
+        <hr style="clear:both"/>
+    </div>
+    <!--<p><a href="{% url 'delete' post.id %}">Delete</a></p>-->
+<ul>
+    <h2><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments:</h2>
+    <!-- Load comments -->
+    {% load comments %}
+    {% render_comment_list for post %}
+    <br><br>
+    {% get_comment_form for post as form %}
+    <h3>Add Comment</h3>
+    {% if user.is_authenticated %}
+    <form role="form" action="{% comment_form_target %}" method="POST">
+        <div class="form-group">
+    {% csrf_token %}
+    {{ form.comment }}
+    {{ form.honeypot }}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+        </div>
+    <input type="hidden" name="next" value="{% url 'index' %}" />
+    <button type="submit" id="id_submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+    {% endif %}
+</ul>
+<br><br>
+
+</div>
+</body>
+
+</html>

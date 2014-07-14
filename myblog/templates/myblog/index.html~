@@ -1,0 +1,19 @@
+<html>
+<head>
+</head>
+
+<body>
+<h1>My Blog</h1>
+{% if latest_blog_list %}
+    <ul>
+    {% for myblog in latest_blog_list %}
+        <li><a href="/blog/{{ myblog.id }}/">{{ myblog.title }}</a></li>
+	<p>{{ myblog.body }}</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+
+</html>

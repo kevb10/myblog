@@ -1,0 +1,15 @@
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+from myblog.models import Post
+
+def index(request):
+	latest_blog_list = Post.objects.order_by('-pub_date')[:10]
+	context = {'latest_blog_list': latest_blog_list}
+	return render(request, 'myblog/index.html', context)
+
+def more(request, post_id):
+	post = get_object_or_404(Post, pk=post_id)	
+	return render(request, 'blog/more.html', {'post': post})
+
+
