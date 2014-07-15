@@ -40,7 +40,8 @@
             {{ form.body }}
         </div>
         <div style="margin-left:105px;">
-            <button type="submit" class="btn btn-default">Add Blog</button>
+            <input type="hidden" name="next" value="{% url 'index' %}" />
+            <button type="submit" class="btn btn-default">Add Blog Post</button>
         </div>
     </form>
 {% else %}
