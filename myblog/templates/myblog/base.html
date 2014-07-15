@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Kevin Manase's Blog</title>
+    {% block title %}<title>Kevin Manase's Blog</title>{% endblock %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
      {% load staticfiles %}
     <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    <style>
+        #id_honeypot {
+        display: none;
+        }
+    </style>
 </head>
-
 <body>
+
 <div class="container">
     <div class="header">
         <ul class="nav nav-pills pull-right">
@@ -25,3 +30,11 @@
         </ul>
         <h3 class="text-muted">Kevin Manase's Blog</h3>
     </div>
+    {% block content %}
+    <h1>This is an example title</h1>
+    <p>This is an example paragraph.</p>
+    {% endblock %}
+    {% block footer %}<footer><p align="center">Kevin Manase 2014 | MyBlog</p></footer>{% endblock %}
+</div>
+</body>
+</html>

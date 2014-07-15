@@ -1,35 +1,5 @@
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>{{ post.title }}</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    {% load staticfiles %}
-    <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
-    <style>
-    #id_honeypot {
-    display: none;
-        }
-    </style>
-</head>
-
-<body>
-<div class="container">
-    <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="{% url 'index' %}">Home</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'new' %}">New Post</a></li>
-            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'auth_login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-        <h3 class="text-muted">Kevin Manase's Blog</h3>
-    </div>
+{% extends "myblog/base.html" %}
+        {% block content %}
     <h2 style="text-align:left;float:left"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;{{ post.title }}</h2>
     <h5 style="text-align:right;float:right;margin-top:30px">{{ post.pub_date }}</h5>
     <hr style="clear:both"/>
@@ -71,7 +41,4 @@
 </ul>
 <br><br>
 
-</div>
-</body>
-
-</html>
+        {% endblock %}

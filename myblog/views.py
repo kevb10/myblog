@@ -71,21 +71,3 @@ def loginView(request):
         print "masay"
         # Return an 'invalid login' error message.
     print HttpResponseRedirect(reverse('auth_login'))
-'''
-def delete(request, new_id):
-    new_to_delete = get_object_or_404(Post, id=new_id)
-    #+some code to check if this object belongs to the logged in user
-
-    if request.method == 'POST':
-        form = DeleteNewForm(request.POST, instance=new_to_delete)
-
-        if form.is_valid(): # checks CSRF
-            new_to_delete.delete()
-            return HttpResponseRedirect('') # wherever to go after deleting
-
-    else:
-        form = DeleteNewForm(instance=new_to_delete)
-
-    template_vars = {'form': form}
-    return render(request, 'myblog/delete.html', template_vars)
-'''
