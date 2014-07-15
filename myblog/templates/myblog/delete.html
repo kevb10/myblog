@@ -1,32 +1,5 @@
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Kevin Manase's Blog</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-     {% load staticfiles %}
-    <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
-</head>
-
-<body>
-<div class="container">
-    <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="{% url 'index' %}">Home</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'new' %}">New Post</a></li>
-            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'auth_login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-        <h3 class="text-muted">Kevin Manase's Blog</h3>
-    </div>
-    <h3>Deleted</h3>
-    <p>Item successfully deleted</p
-</div>
-</body>
-</html>
+{% extends "myblog/base.html" %}
+    {% block content %}
+        <h3>Deleted</h3>
+        <p>Item successfully deleted</p>
+    {% endblock %}
