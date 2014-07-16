@@ -6,9 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block title %}<title>Kevin Manase's Blog</title>{% endblock %}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-     {% load staticfiles %}
-    <link href="{% static '../static/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '../static/stylesheets/bootstrap.css' %}">
+    <link href="{% static '../static/stylesheets/jumbotron-narrow.css' %}" rel="stylesheet">
     <style>
         #id_honeypot {
         display: none;
@@ -28,7 +28,7 @@
             <li><a href="{% url 'auth_login' %}">Login</a></li>
             {% endif %}
         </ul>
-        <h3 class="text-muted">Kevin Manase's Blog</h3>
+        <h3 class="text-muted"><img src="../static/images/kevin.jpg" width="50px" height="auto" alt="Hi! :)" style="border-radius:50px">&nbsp;KM</h3>
     </div>
     {% block content %}
     <h1>This is an example title</h1>
