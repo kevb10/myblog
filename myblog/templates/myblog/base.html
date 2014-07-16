@@ -28,7 +28,7 @@
             <li><a href="{% url 'auth_login' %}">Login</a></li>
             {% endif %}
         </ul>
-        <h3 class="text-muted"><img src="../static/images/kevin.jpg" width="50px" height="auto" alt="Hi! :)" style="border-radius:50px">&nbsp;KM</h3>
+        <h3 class="text-muted"><img src="{% static '../static/images/kevin.jpg' %}" width="50px" height="auto" alt="Hi! :)" style="border-radius:50px">&nbsp;KM</h3>
     </div>
     {% block content %}
     <h1>This is an example title</h1>
