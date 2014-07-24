@@ -39,7 +39,11 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.sites',
     'myblog',
+    'ckeditor',
 )
+
+CKEDITOR_UPLOAD_PATH = 'myblog/static/uploads'
+CKEDITOR_IMAGE_BACKEND = 'PIL'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -85,6 +89,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

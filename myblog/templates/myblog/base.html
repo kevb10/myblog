@@ -20,7 +20,8 @@
 <div class="container">
     <div class="header">
         <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'all' %}">Blog</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'new' %}">New Post</a></li>
             <li><a href="{% url 'auth_logout' %}">Logout</a></li>

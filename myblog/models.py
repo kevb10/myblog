@@ -1,10 +1,11 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    body = models.TextField(max_length=1000)
+    body = RichTextField()
     pub_date = models.DateTimeField('date published')
 
     def __unicode__(self):

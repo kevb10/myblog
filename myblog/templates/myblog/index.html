@@ -12,7 +12,7 @@
         <h2 style="text-align:left;float:left"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;{{ myblog.title }}</h2>
         <h5 style="text-align:right;float:right;margin-top:30px">{{ myblog.pub_date }}</h5>
         <hr style="clear:both"/>
-        <p>{{ myblog.body }}</p>
+        <p>{{ myblog.body|safe|truncatewords:50 }}</p>
         <br>
         <p><a class="btn btn-primary" role="button" href="{% url 'more' myblog.id %}">Read more</a></p>
         {% endfor %}

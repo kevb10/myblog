@@ -6,4 +6,5 @@ urlpatterns = patterns('',
 	url(r'^(?P<post_id>\d+)/$', views.more,  name='more'),
     url(r'^new/$', views.new,  name='new'),
     url(r'^(?P<id>\d+)/delete/$', views.delete,  name='delete'),
+    url(r'^all/$', views.paging, name="all"),
 )

@@ -1,12 +1,14 @@
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views import generic
 from django.utils import timezone
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from myblog.models import Post
 from django import forms
+from ckeditor.fields import RichTextField
 
 class DeleteNewForm(forms.ModelForm):
     class Meta:
@@ -26,11 +28,12 @@ class IndexView(generic.ListView):
         # return last 10 blog posts
         return Post.objects.filter(
             pub_date__lte = timezone.now()
-        ).order_by('-pub_date')[:10]
+        ).order_by('-pub_date')[:3]
 
 class PostForm(forms.ModelForm):
         class Meta:
             model = Post
+            model.body = RichTextField()
             exclude = ['pub_date']
 
 def new(request):
@@ -71,3 +74,20 @@ def loginView(request):
         print "masay"
         # Return an 'invalid login' error message.
     print HttpResponseRedirect(reverse('auth_login'))
+
+def paging(request):
+    blog_posts = Post.objects.order_by('-pub_date')
+    paginator = Paginator(blog_posts, 10) #shows 10 per page
+
+    page = request.GET.get('page')
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # if page is out of range, deliver last page
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'myblog/blog.html', {"posts": posts, "blog": blog_posts})
